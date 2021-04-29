@@ -28,13 +28,21 @@ namespace WishList.Controllers
             return View("Create");
         }
 
-        // [HttpPost]
-        // public IActionResult Create(Item item)
-        // {
-        //     _context.Items.Add(item);
-        //     _context.SaveChanges();
-        //
-        //     RedirectToAction(Index());
-        // }
+        [HttpPost]
+        public IActionResult Create(Item item)
+        {
+            _context.Items.Add(item);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Item");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var item = _context.Items.FirstOrDefault(i => i.Id == id);
+            _context.Items.Remove(item);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Item");
+        }
     }
 }
