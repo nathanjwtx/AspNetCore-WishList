@@ -16,25 +16,25 @@ namespace WishList.Controllers
         }
         
         // GET
-        public IActionResult Index(List<Item> list)
+        public IActionResult Index()
         {
-            var items = _context.Items.ToList();
-            return Index(items);
+            var items = _context.Items;
+            return View("Index", items.ToList());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return Create();
+            return View("Create");
         }
 
-        [HttpPost]
-        public IActionResult Create(Item item)
-        {
-            _context.Items.Add(item);
-            _context.SaveChanges();
-        
-            RedirectToAction(Index());
-        }
+        // [HttpPost]
+        // public IActionResult Create(Item item)
+        // {
+        //     _context.Items.Add(item);
+        //     _context.SaveChanges();
+        //
+        //     RedirectToAction(Index());
+        // }
     }
 }
